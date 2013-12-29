@@ -45,7 +45,7 @@ function play() {
 function drawRocket() {
     rocketimage = new createjs.Bitmap("images/fullrocket.png");
     rocketimage.scaleX = winW/1600;
-    rocketimage.scaleY = winH/1000;
+    rocketimage.scaleY = winH/1300;
     rocket = {x: winW / 2 - (171*rocketimage.scaleX)/2, y: 1.2 * winH - (300*rocketimage.scaleY)/2, speed: 100, rotationspeed: 0, health: 100};
     rocketimage.x = rocket.x;
     rocketimage.y = rocket.y;
@@ -76,13 +76,13 @@ function handleTick(event) {
             if(clouds[i].y > winH){
                 clouds.splice(i,1);
             }else{
-                clouds[i].y = clouds[i].y + 7;
+                clouds[i].y = clouds[i].y + winH/142;
                 clouds[i].x = clouds[i].x - rocketimage.rotation/10 + 1;
 
             }
         }
         var rocketwidth = 171*(winW/1600);
-        var rocketheight = 300*(winH/1000);
+        var rocketheight = 300*(winH/1300);
         var jetwidth = 600*(winW/1600);
         var jetheight = 252*(winH/1000)
         for (var i = 0; i < jets.length; i++) {
@@ -107,7 +107,7 @@ function handleTick(event) {
             if(jets[i].y > winH){
                 jets.splice(i,1);
             }else{
-                jets[i].y = jets[i].y + 9;
+                jets[i].y = jets[i].y + winH/111;
                 jets[i].x = jets[i].x - rocketimage.rotation/10 + 2;
             }
         }
@@ -135,7 +135,7 @@ function handleTick(event) {
             if(birds[i].y > winH){
                 birds.splice(i,1);
             }else{
-                birds[i].y = birds[i].y + 9;
+                birds[i].y = birds[i].y + winH/111;
                 birds[i].x = birds[i].x - rocketimage.rotation/10 - 1;
             }
         }
