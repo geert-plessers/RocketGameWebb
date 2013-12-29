@@ -28,12 +28,12 @@ function play() {
         accelerationX = event.accelerationIncludingGravity.x;
         if (accelerationX > 0) {
             if(rocketimage.rotation + 5 <= 45 && rocketimage.rotation +5 >= -45){
-                rocketimage.rotation += accelerationX;
+                rocketimage.rotation -= accelerationX;
             }
         }
         else if (accelerationX < 0) {
             if(rocketimage.rotation -5 <= 45 && rocketimage.rotation -5 >= -45){
-                rocketimage.rotation += accelerationX;
+                rocketimage.rotation -= accelerationX;
             }
         }
 
@@ -45,7 +45,7 @@ function play() {
 function drawRocket() {
     rocketimage = new createjs.Bitmap("images/fullrocket.png");
     rocketimage.scaleX = winW/1600;
-    rocketimage.scaleY = winH/1162,5;
+    rocketimage.scaleY = winH/1000;
     rocket = {x: winW / 2 - (171*rocketimage.scaleX)/2, y: 1.2 * winH - (300*rocketimage.scaleY)/2, speed: 100, rotationspeed: 0, health: 100};
     rocketimage.x = rocket.x;
     rocketimage.y = rocket.y;
@@ -82,7 +82,7 @@ function handleTick(event) {
             }
         }
         var rocketwidth = 171*(winW/1600);
-        var rocketheight = 300*(winH/1162,5);
+        var rocketheight = 300*(winH/1000);
         var jetwidth = 600*(winW/1600);
         var jetheight = 252*(winH/1000)
         for (var i = 0; i < jets.length; i++) {
