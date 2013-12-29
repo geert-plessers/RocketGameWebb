@@ -81,19 +81,15 @@ function handleTick(event) {
 
             }
         }
+        var rocketwidth = 171*(winW/1600);
+        var rocketheight = 300*(winH/1162,5);
+        var jetwidth = 600*(winW/1600);
+        var jetheight = 252*(winH/1000)
         for (var i = 0; i < jets.length; i++) {
-            if(jets[i].x < rocketimage.x && jets[i].x + 600 > rocketimage.x && jets[i].y + 252 > rocketimage.y && jets[i].y+252 < rocketimage.y+10){
-                rocket.health = rocket.health-10;
-            }            
-            if(jets[i].y > winH){
-                jets.splice(i,1);
-            }else{
-                jets[i].y = jets[i].y + 9;
-                jets[i].x = jets[i].x - rocketimage.rotation/10 + 2;
-            }
-        }
-        for (var i = 0; i < birds.length; i++) {
-            if(birds[i].x < rocketimage.x && birds[i].x + 156.4 > rocketimage.x && birds[i].y + 204.8 > rocketimage.y && birds[i].y+ 204.8< rocketimage.y+10){
+            if(jets[i].x + jetwidth/2 < rocketimage.x+rocketwidth/2
+                && jets[i].x + jetwidth/2 > rocketimage.x-rocketwidth/2
+                && jets[i].y + jetheight/2 > rocketimage.y
+                && jets[i].y + jetheight/2 < rocketimage.y + rocketheight){
                 var randomsound = Math.random();
                 var hitsound;
                 if(randomsound < 0.33){
@@ -105,6 +101,36 @@ function handleTick(event) {
                 }
                 rocket.health = rocket.health-10;
                 hitsound.play();
+                stage.removeChild (jets[i]);
+                jets.splice(i,1);
+            }            
+            if(jets[i].y > winH){
+                jets.splice(i,1);
+            }else{
+                jets[i].y = jets[i].y + 9;
+                jets[i].x = jets[i].x - rocketimage.rotation/10 + 2;
+            }
+        }
+        var birdwidth = 156.4*(winW/1600);
+        var birdheight = 204.8*(winH/1000);
+        for (var i = 0; i < birds.length; i++) {
+            if(birds[i].x + birdwidth/2 < rocketimage.x+rocketwidth/2
+                && birds[i].x + birdwidth/2 > rocketimage.x-rocketwidth/2
+                && birds[i].y + birdheight/2 > rocketimage.y
+                && birds[i].y + birdheight/2 < rocketimage.y + rocketheight){
+                var randomsound = Math.random();
+                var hitsound;
+                if(randomsound < 0.33){
+                    hitsound = hs1;
+                }else if(randomsound < 0.66){
+                    hitsound = hs2;
+                }else{
+                    hitsound = hs3;
+                }
+                rocket.health = rocket.health-10;
+                hitsound.play();
+                stage.removeChild (birds[i]);
+                birds.splice(i,1);
             }  
             if(birds[i].y > winH){
                 birds.splice(i,1);
